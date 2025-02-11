@@ -8,6 +8,7 @@ Boilerplate built in [Nestjs](https://nestjs.com/) that creates a microservice u
 - Cache module with [Redis](https://redis.io);
 - Message Queue with [BullMQ](https://docs.bullmq.io/);
 - HTTP module to access external apis;
+- ORM with MongoDB;
 
 ## ⚙️ Project setup
 

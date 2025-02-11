@@ -5,6 +5,7 @@ import { PostgresModule } from './infra/database/postgres/postgres.module';
 import { HttpModule } from './infra/http/http.module';
 import { BullMQModule } from './infra/messageQueue/bullmq/bullmq.module';
 import { CacheRedisModule } from './infra/cache/redis/redis.module';
+import { MongoModule } from './infra/database/mongo/mongo.module';
 
 const PRODUCTION: string = 'production';
 const DEVELOPMENT: string = 'development';
@@ -20,6 +21,7 @@ const NODE_ENV = process.env.NODE_ENV || DEVELOPMENT;
     }),
     HttpModule,
     PostgresModule,
+    MongoModule,
     BullMQModule,
     CacheRedisModule,
   ],
