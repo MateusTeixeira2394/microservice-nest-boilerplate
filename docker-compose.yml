@@ -1,0 +1,43 @@
+services:
+  database-pg:
+    image: postgres:16
+    container_name: database-pg
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - '5432:5432'
+    networks:
+      - custom-network
+  cache-redis:
+    image: redis
+    container_name: cache-redis
+    ports:
+      - '6379:6379'
+    networks:
+      - custom-network
+  microservice:
+    build:
+      context: .
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=prod
+      - PORT=3000
+      - DB_HOST=database-pg
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASS=postgres
+      - DB_DATABASE=postgres
+      - REDIS_HOST=cache-redis
+      - REDIS_PORT=6379
+    networks:
+      - custom-network
+    depends_on:
+      - database-pg
+      - cache-redis
+    command: ['npm', 'run', 'start:prod']
+networks:
+  custom-network:
+    driver: bridge
